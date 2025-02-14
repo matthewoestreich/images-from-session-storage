@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Images From Session Storage</title>
+	</head>
+	<body>
+		<img id="png-img" style="height:400px;width:400px;" />
+    <button id="change-img-src">Simulate user changing value</button>
+		<script>
+      const EXPECTED_IMG = "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+
+			if (!sessionStorage.getItem("png-img")) {
+        sessionStorage.setItem("png-img", EXPECTED_IMG);
+			}
+
+			const pngImgElement = document.getElementById("png-img");
+      pngImgElement.src = sessionStorage.getItem("png-img");
+
+      const btn = document.getElementById("change-img-src");
+      btn.addEventListener("click", () => {
+        sessionStorage.setItem("png-img", "/sample.png");
+        window.location.reload();
+      });
+		</script>
+	</body>
+</html>
